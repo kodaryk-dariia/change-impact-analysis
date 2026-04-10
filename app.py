@@ -105,9 +105,9 @@ def simulate_subset(threats, mitigations, mapping, subset):
 
         R = L * H * mitigation_factor
 
-        # ❗ ВІДСІКАННЯ (як у дипломі)
+        #
         if R > threshold:
-            return None, None, None
+            return None, None, None, None
 
         residuals.append(R)
 
@@ -167,6 +167,9 @@ if st.button("Run Full Analysis"):
         })
 
         progress.progress((i+1)/len(subsets))
+    if len(results) == 0:
+        st.error("No valid control sets found. Try increasing Risk Threshold.")
+        st.stop()
 
     results_df = pd.DataFrame(results)
 
