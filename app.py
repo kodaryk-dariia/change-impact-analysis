@@ -108,6 +108,8 @@ def simulate_subset(threats, mitigations, mapping, subset):
         #
         if R > threshold:
             return None, None, None, None
+        if threshold < 0.05:
+            st.warning("Very strict threshold may eliminate all solutions.")
 
         residuals.append(R)
 
